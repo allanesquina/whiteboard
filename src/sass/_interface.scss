@@ -20,18 +20,19 @@ img {
 
 canvas {
   // transform: scale(2) translateY(30%) translateZ(0);
-  width: 99vw;
-  height: 99vh;
+  // width: 99vw;
+  // height: 99vh;
   cursor: crosshair;
 }
 
-[data-component] {
+.modal {
   visibility: hidden;
   display: block;
   position: fixed;
-  transition: .2s;
+  // transition: .2s;
   opacity: 0;
 }
+
 .visible {
   opacity: 1;
   visibility: visible;
@@ -90,7 +91,27 @@ canvas {
     }
   }
 
+  &-pencilbtn {
+    &.active {
+      background-color: #4d566d;
+    }
+  }
+
   &-pencilsettings {
+    top: 10px;
+    left: 80px ;
+    background: $color2;
+    min-width: 200px;
+    min-height: 150px;
+  }
+
+  &-backgroundbtn {
+    &.active {
+      background-color: #4d566d;
+    }
+  }
+
+  &-backgroundsettings {
     top: 10px;
     left: 80px ;
     background: $color2;

@@ -1,12 +1,25 @@
-<menu id="menu">
-  <div class="item icon icon-pencil" data-action="togglePencilSettings"></div>
+<menu id="menu" data-component="menu">
+  <div
+    class="item icon icon-pencil"
+    data-component="pencilbtn"
+    data-action="togglePencilSettings"
+  ></div>
   <div class="item icon icon-eraser"></div>
-  <div class="item icon icon-background" data-action="toggleColorPallet"></div>
+  <div
+    class="item icon icon-background"
+    data-component="backgroundbtn"
+    data-action="toggleBackgroundSettings"
+  ></div>
 </menu>
 
-<div class="sub-menu" data-component="pencilSettings">
+<div class="sub-menu" data-type="modal" data-component="pencilsettings">
   <div class="size"></div>
-  <div class="color" data-action="openColorPallet"></div>
+  <div class="color" data-action="toggleColorPallet">o</div>
 </div>
 
-<div class="color-pallet" data-component="colorPallet"></div>
+<div class="sub-menu" data-type="modal" data-component="backgroundsettings">
+  <div class="size"></div>
+  <div class="color" data-action="toggleColorPallet">o</div>
+</div>
+
+<div class="color-pallet" data-type="modal" data-component="colorpallet"></div>

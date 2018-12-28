@@ -1,3 +1,5 @@
+import Store from './store';
+
 function getViewportSize() {
   const w = Math.max(
     document.documentElement.clientWidth,
@@ -49,8 +51,8 @@ class Board {
 }
 
 function setCanvasSize(canvas) {
-  canvas.width = getViewportSize().w;
-  canvas.height = getViewportSize().h;
+  canvas.width = getViewportSize().w - 10;
+  canvas.height = getViewportSize().h - 10;
 }
 
 const canvas = document.getElementById("canvas");
@@ -91,27 +93,45 @@ class Component {
   constructor(el, name) {
     this.el = el;
     this.name = name.toLowerCase();
+    this.isVisible = false;
+    this.isActive = false;
     this.el.classList.add("ui-" + this.name);
   }
 
   show() {
     this.el.classList.add('visible');
-    // this.el.style.visibility = "visible";
-    this.visible = true;
+    this.isVisible = true;
   }
 
   hide() {
     this.el.classList.remove('visible');
-    // this.el.style.visibility = "hidden";
-    this.visible = false;
+    this.isVisible = false;
   }
 
   toggle() {
-    if(this.visible) {
+    if(this.isVisible) {
       this.hide();
       return;
     } 
     this.show();
+  }
+
+  toggleActive() {
+    if(this.isActive) {
+      this.deactive();
+      return;
+    } 
+    this.active();
+  }
+
+  active() {
+    this.isActive = true;
+    this.el.classList.add('active');
+  }
+
+  deactive() {
+    this.isActive = false;
+    this.el.classList.remove('active');
   }
 }
 
@@ -126,40 +146,176 @@ function createColorPallet() {
   });
 }
 
+
+const store = new Store();
 const components = new Map();
+store.on('change', state => console.log(state))
 
 const actions = {
   toggleColorPallet: e => {
-    components.get("colorpallet").toggle();
+    const state = store.state;
+    if(state.colorpallet.isVisible) {
+      store.set({ 
+        colorpallet: { isVisible: false},
+      });
+    } else {
+      store.set({ 
+        colorpallet: { isVisible: true},
+      });
+    }
+  },
+  toggleBackgroundSettings: e => {
+    const state = store.state;
+    if(state.backgroundsettings.isVisible) {
+      store.set({ 
+        backgroundbtn: { isActive: false },
+        backgroundsettings: { isVisible: false},
+      });
+    } else {
+      store.set({ 
+        backgroundbtn: { isActive: true },
+        backgroundsettings: { isVisible: true},
+        colorpallet: { target: `background`},
+      });
+    }
   },
   togglePencilSettings: e => {
-    components.get("pencilsettings").toggle();
+    const state = store.state;
+    if(state.pencilsettings.isVisible) {
+      store.set({ 
+        pencilbtn: { isActive: false },
+        pencilsettings: { isVisible: false},
+      });
+    } else {
+      store.set({ 
+        pencilbtn: { isActive: true },
+        pencilsettings: { isVisible: true},
+        colorpallet: { target: `pencil`},
+      });
+    }
   },
   hideAll: e => {
-    components.forEach(c => c.hide());
+    store.set({ 
+      pencilbtn: { isActive: false },
+      pencilsettings: { isVisible: false},
+      backgroundsettings: { isVisible: false},
+      backgroundbtn: { isActive: false },
+      colorpallet: { isVisible: false},
+    });
   },
   changeColor: color => {
+    const state = store.state;
     actions.hideAll();
-    board.setConfig({ pencil: { color }});
+    if(state.colorpallet.target === 'pencil') {
+      board.setConfig({ pencil: { color }});
+    } else {
+      document.body.style.backgroundColor = color;
+    }
+  }
+};
+
+const init = {
+  pencilbtn: (comp) => {
+    const state = {
+      [comp.name]: {
+        isActive: false,
+      }
+    };
+    store.set(state);
+
+    store.on('change', (state) => {
+      const compState = state[comp.name];
+      if(comp.isActive !== compState.isActive) {
+        comp.toggleActive();
+      }
+    });
+  },
+  pencilsettings: (comp) => {
+    const state = {
+      [comp.name]: {
+        isVisible: false,
+      }
+    };
+    store.set(state);
+
+    store.on('change', (state) => {
+      const compState = state[comp.name];
+      if(comp.isVisible !== compState.isVisible) {
+        comp.toggle();
+      }
+    });
+  },
+  backgroundbtn: (comp) => {
+    const state = {
+      [comp.name]: {
+        isActive: false,
+      }
+    };
+    store.set(state);
+
+    store.on('change', (state) => {
+      const compState = state[comp.name];
+      if(comp.isActive !== compState.isActive) {
+        comp.toggleActive();
+      }
+    });
+  },
+  backgroundsettings: (comp) => {
+    const state = {
+      [comp.name]: {
+        isVisible: false,
+      }
+    };
+    store.set(state);
+
+    store.on('change', (state) => {
+      const compState = state[comp.name];
+      if(comp.isVisible !== compState.isVisible) {
+        comp.toggle();
+      }
+    });
+  },
+  colorpallet: (comp) => {
+    const state = {
+      [comp.name]: {
+        isVisible: false,
+      }
+    };
+    store.set(state);
+
+    store.on('change', (state) => {
+      const compState = state[comp.name];
+      if(comp.isVisible !== compState.isVisible) {
+        comp.toggle();
+      }
+    });
   }
 };
 
 const types = {
   component: comp => {
     components.set(comp.name, comp);
+    init[comp.name] && init[comp.name](comp);
+  },
+  modal: comp => {
+    comp.el.classList.add('modal');
   }
 };
 
 const uiComponents = document.querySelectorAll("[data-component]");
 uiComponents.forEach(comp => {
   const name = comp.getAttribute("data-component");
-  types.component(new Component(comp, name));
+  const type = comp.getAttribute("data-type");
+  const uiComp = new Component(comp, name);
+  types.component(uiComp);
+  types[type] && types[type](uiComp)
 });
 
 createColorPallet();
 
 ["click", "touchpress"].forEach(eventType => {
   document.addEventListener(eventType, e => {
+    e.preventDefault();
     const comp = e.target;
     const data = comp.getAttribute("data-action");
     let action;
