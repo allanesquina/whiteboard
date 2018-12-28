@@ -1,0 +1,104 @@
+$color1: #1f2531;
+$color2: #333b50;
+
+* {
+  padding: 0;
+  margin: 0;
+}
+
+body {
+  font-family: 'Helvetica Neue', sans-serif;
+  text-align: center;
+  background: $color1;
+}
+
+img {
+  display: block;
+  margin: 50px auto;
+}
+
+
+canvas {
+  // transform: scale(2) translateY(30%) translateZ(0);
+  width: 99vw;
+  height: 99vh;
+  cursor: crosshair;
+}
+
+[data-component] {
+  visibility: hidden;
+  display: block;
+  position: fixed;
+  transition: .2s;
+  opacity: 0;
+}
+.visible {
+  opacity: 1;
+  visibility: visible;
+
+}
+
+#menu {
+  background: $color2;
+  min-width: 60px;
+  min-height: 200px;
+  position: fixed;
+  top: 10px;
+  left: 10px;
+
+  .item {
+    width: 60px;
+    height: 60px;
+
+    &:hover, &--selected {
+      border: 2px solid #4d566d;
+    }
+  }
+}
+
+.icon {
+  background-size: 50%;
+  background-position: center;
+  background-repeat: no-repeat;
+  cursor: pointer;
+  
+  &-pencil {
+    background-image: url('../assets/img/pencil.png');
+  }
+
+  &-background {
+    background-image: url('../assets/img/background.png');
+  }
+
+  &-eraser {
+    background-image: url('../assets/img/eraser.png');
+  }
+}
+.ui {
+  &-colorpallet {
+    top: 10px;
+    left: 80px ;
+    background: $color2;
+    min-width: 200px;
+    min-height: 150px;
+
+    &__color {
+      width: 30px;
+      height: 30px;
+      display: inline-block;
+      cursor: pointer;
+    }
+  }
+
+  &-pencilsettings {
+    top: 10px;
+    left: 80px ;
+    background: $color2;
+    min-width: 200px;
+    min-height: 150px;
+
+  }
+}
+
+
+

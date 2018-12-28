@@ -1,0 +1,56 @@
+
+// @import url('https://fonts.googleapis.com/css?family=Montserrat:400,600,700');
+
+// @font-face {
+//   font-family: 'DigitalFont';
+//   src: url('../assets/font/digital-7-mono.ttf');
+// }
+
+html,
+body *{
+  font-size: 16px;
+}
+
+body {
+  margin: 0;
+
+  &.fixed {
+    overflow: hidden;
+  }
+}
+
+* {
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  box-sizing: border-box;
+}
+
+:after,
+:before {
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  box-sizing: border-box;
+}
+
+textarea:focus, input:focus, button:focus {
+  outline: none;
+}
+
+.container {
+  padding-right: 15px;
+  padding-left: 15px;
+  margin-right: auto;
+  margin-left: auto;
+
+  @include breakpoint(sm) {
+    width: 750px;
+  }
+
+  @include breakpoint(md) {
+    width: 970px;
+  }
+
+  @include breakpoint(lg) {
+    width: 1170px;
+  }
+}
