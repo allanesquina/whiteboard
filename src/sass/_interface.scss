@@ -17,26 +17,8 @@ img {
   margin: 50px auto;
 }
 
-
 canvas {
-  // transform: scale(2) translateY(30%) translateZ(0);
-  // width: 99vw;
-  // height: 99vh;
   cursor: crosshair;
-}
-
-.modal {
-  visibility: hidden;
-  display: block;
-  position: fixed;
-  // transition: .2s;
-  opacity: 0;
-}
-
-.visible {
-  opacity: 1;
-  visibility: visible;
-
 }
 
 #menu {
@@ -75,51 +57,30 @@ canvas {
     background-image: url('../assets/img/eraser.png');
   }
 }
-.ui {
-  &-colorpallet {
-    top: 10px;
-    left: 80px ;
-    background: $color2;
-    min-width: 200px;
-    min-height: 150px;
 
-    &__color {
-      width: 30px;
-      height: 30px;
-      display: inline-block;
-      cursor: pointer;
-    }
-  }
 
-  &-pencilbtn {
-    &.active {
-      background-color: #4d566d;
-    }
-  }
+// ------------------------------------------------------
 
-  &-pencilsettings {
-    top: 10px;
-    left: 80px ;
-    background: $color2;
-    min-width: 200px;
-    min-height: 150px;
-  }
+.color-pallet {
+  position: fixed;
+  top: 10px;
+  left: 80px ;
+  background: $color2;
+  min-width: 200px;
+  visibility: hidden;
+  min-height: 150px;
+  opacity: 0;
+  transition: .2s;
 
-  &-backgroundbtn {
-    &.active {
-      background-color: #4d566d;
-    }
-  }
-
-  &-backgroundsettings {
-    top: 10px;
-    left: 80px ;
-    background: $color2;
-    min-width: 200px;
-    min-height: 150px;
-
+  &__color {
+    width: 30px;
+    height: 30px;
+    display: inline-block;
+    cursor: pointer;
   }
 }
 
-
-
+.visible {
+  opacity: 1;
+  visibility: visible;
+}
