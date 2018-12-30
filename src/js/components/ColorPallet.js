@@ -4,31 +4,48 @@ import { Connect } from "../core/store";
 class ColorPallet extends Component {
   constructor(DOM) {
     super(DOM);
+  }
+
+  onInit() {
     this.createColorPallet();
+    document.addEventListener("click", e => {
+      const { isVisible } = this.store.state.colorPallet;
+      if (isVisible) {
+        this.store.setState({
+          colorPallet: { isVisible: false }
+        });
+      }
+    });
   }
 
   onStateChange(state) {
-    const { target } = this.props;
-    if (!state.colorpallet[target]) {
-      return;
-    }
-    if (state.colorpallet[target].isVisible) {
-      this.DOM.firstChild.classList.add("visible");
+    const { target, isVisible, x } = state.colorPallet;
+    const el = this.ids.get('comp');
+    console.log(this.store.state.colorPallet)
+
+    if (isVisible) {
+      el.style.left = `${x}px`;
+      el.classList.add("visible");
     } else {
-      this.DOM.firstChild.classList.remove("visible");
+      el.classList.remove("visible");
     }
+
+    this.props.target = target;
   }
 
   handleChangeColor(color) {
     this.store.setState({
-      [this.props.target]: {
-        color
+      toolbox: {
+        [this.props.target]: {
+          color
+        }
       }
     });
   }
 
   createColorPallet() {
     const colors = ["#fff", "#ccc", "#999", "#444", "#58c7ae"];
+    const parent = this.ids.get('comp');
     colors.forEach(color => {
       const el = document.createElement("div");
       el.classList.add("color-pallet__color");
@@ -44,13 +61,14 @@ class ColorPallet extends Component {
         }
       });
 
-      this.DOM.firstChild.appendChild(el);
+      parent.appendChild(el);
     });
   }
 
   render() {
     return `
         <div 
+          component-id="comp"
           class="color-pallet" 
         ></div>
         `;

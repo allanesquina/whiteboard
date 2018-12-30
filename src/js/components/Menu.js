@@ -1,54 +1,70 @@
 import { Component } from "../core/Component";
 import { Connect } from "../core/store";
+import { openFullscreen } from "../core/util";
 
 class Menu extends Component {
   constructor(DOM) {
     super(DOM);
-    this.handleClick = this.handleClick.bind(this);
   }
 
   onStateChange(state) {
     console.log(`menu`, state);
   }
 
-  handleClick(e) {
-    this.store.setState({ colorpallet: { pencil: { isVisible: true } } });
+  handleClickFullscreen(e) {
+    openFullscreen();
   }
 
-  handleClick2(e) {
-    this.store.setState({ colorpallet: { pencil: { isVisible: false } } });
+  handleClickBackground(e) {
+    this.store.setState({
+      toolbox: { currentTool: "background" }
+    });
   }
 
-  handleClick3(e) {
-    this.store.setState({ colorpallet: { background: { isVisible: true } } });
+  handleClickEraser(e) {
+    this.store.setState({
+      toolbox: { currentTool: "eraser" }
+    });
   }
 
-  handleClick4(e) {
-    this.store.setState({ colorpallet: { background: { isVisible: false } } });
+  handleClickPencil(e) {
+    this.store.setState({
+      toolbox: { currentTool: "pencil" }
+    });
+  }
+
+  handleClickBrush(e) {
+    this.store.setState({
+      toolbox: { currentTool: "brush" }
+    });
   }
 
   render() {
     return `
-            <div id="menu">
+            <div class="tool-box__menu">
+								<div data-component="MenuButton"
+										data-type="brush"
+                    component-click="handleClickBrush(e)"
+                >
+                </div>
 								<div data-component="MenuButton"
 										data-type="pencil"
-                    component-click="handleClick(e)"
+                    component-click="handleClickPencil(e)"
                 >
                 </div>
                 <div data-component="MenuButton"
 										data-type="eraser"
-                    component-click="handleClick2(e)"
+                    component-click="handleClickEraser(e)"
                 ></div>
                 <div data-component="MenuButton"
 										data-type="background"
-                    component-click="handleClick3(e)"
+                    component-click="handleClickBackground(e)"
                 >
                 </div>
                 <div data-component="MenuButton"
-                    component-click="handleClick4(e)"
+										data-type="fullscreen"
+                    component-click="handleClickFullscreen(e)"
                 ></div>
-                <div data-target="background" data-component="ColorPallet"></div>
-                <div data-target="pencil" data-component="ColorPallet"></div>
             </div>
         `;
   }

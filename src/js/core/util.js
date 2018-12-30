@@ -1,15 +1,3 @@
-export const str2DOMElement = (html) => {
-  var frame = document.createElement("iframe");
-  frame.style.display = "none";
-  document.body.appendChild(frame);
-  frame.contentDocument.open();
-  frame.contentDocument.write(html);
-  frame.contentDocument.close();
-  var el = frame.contentDocument.body.firstChild;
-  document.body.removeChild(frame);
-  return el;
-};
-
 export const getViewportSize = () => {
   const w = Math.max(
     document.documentElement.clientWidth,
@@ -38,3 +26,32 @@ export const deepExtend = (target, source) => {
     else target[prop] = source[prop];
   return target;
 };
+
+/* Get the documentElement (<html>) to display the page in fullscreen */
+var elem = document.documentElement;
+
+/* View in fullscreen */
+export function openFullscreen() {
+  if (elem.requestFullscreen) {
+    elem.requestFullscreen();
+  } else if (elem.mozRequestFullScreen) { /* Firefox */
+    elem.mozRequestFullScreen();
+  } else if (elem.webkitRequestFullscreen) { /* Chrome, Safari and Opera */
+    elem.webkitRequestFullscreen();
+  } else if (elem.msRequestFullscreen) { /* IE/Edge */
+    elem.msRequestFullscreen();
+  }
+}
+
+/* Close fullscreen */
+export function closeFullscreen() {
+  if (document.exitFullscreen) {
+    document.exitFullscreen();
+  } else if (document.mozCancelFullScreen) { /* Firefox */
+    document.mozCancelFullScreen();
+  } else if (document.webkitExitFullscreen) { /* Chrome, Safari and Opera */
+    document.webkitExitFullscreen();
+  } else if (document.msExitFullscreen) { /* IE/Edge */
+    document.msExitFullscreen();
+  }
+}

@@ -1,6 +1,8 @@
 import Event from "./jps";
 import { deepExtend } from './util';
 
+export let store;
+
 export default class Store {
   constructor(initialState = {}) {
     this.state = {};
@@ -17,12 +19,15 @@ export default class Store {
   }
 }
 
-export const store = new Store();
+export function createStore(state) {
+ store = new Store(state);
+}
 
 export const Connect = comp => {
 
-  return function(DOM) {
-    const c = new comp(DOM)
+  return function() {
+
+    const c = new comp(...arguments)
     c.store = store;
     store.on("change", state => {
       c.onStateChange && c.onStateChange(state);

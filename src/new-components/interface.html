@@ -1,12 +1,21 @@
-<div 
-    id="interface-wrapper" 
-    class="interface-wrapper"
->
-    <div id="app-root" >
-        <div
-            data-component="Screen"
-        ></div>
+<div id="app-root" >
+    <div class="tool-properties">
+       <div data-component="MenuBrushProperties"></div>
+       <div data-component="MenuPencilProperties"></div>
+       <div data-component="MenuEraserProperties"></div>
+       <div data-component="MenuBackgroundProperties"></div>
     </div>
-
-${require('./ui-menu.html')}
+    <div class="board-wrapper">
+        <div class="tool-box">
+          <div data-component="Menu"></div>
+        </div>
+        <div class="board">
+          <div data-component="Canvas"></div>
+        </div>
+    </div>
+    <div data-component="ColorPallet"></div>
+    <!-- <div
+        data-component="Screen"
+    ></div> -->
 </div>
+

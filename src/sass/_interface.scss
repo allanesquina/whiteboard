@@ -1,15 +1,9 @@
 $color1: #1f2531;
 $color2: #333b50;
 
-* {
-  padding: 0;
-  margin: 0;
-}
-
 body {
-  font-family: 'Helvetica Neue', sans-serif;
+  font-family: "Helvetica Neue", sans-serif;
   text-align: center;
-  background: $color1;
 }
 
 img {
@@ -19,24 +13,7 @@ img {
 
 canvas {
   cursor: crosshair;
-}
-
-#menu {
-  background: $color2;
-  min-width: 60px;
-  min-height: 200px;
-  position: fixed;
-  top: 10px;
-  left: 10px;
-
-  .item {
-    width: 60px;
-    height: 60px;
-
-    &:hover, &--selected {
-      border: 2px solid #4d566d;
-    }
-  }
+  transition: 0.5s;
 }
 
 .icon {
@@ -44,43 +21,217 @@ canvas {
   background-position: center;
   background-repeat: no-repeat;
   cursor: pointer;
-  
+
   &-pencil {
-    background-image: url('../assets/img/pencil.png');
+    background-image: url("../assets/img/pencil.png");
   }
 
   &-background {
-    background-image: url('../assets/img/background.png');
+    background-image: url("../assets/img/background.png");
   }
 
   &-eraser {
-    background-image: url('../assets/img/eraser.png');
+    background-image: url("../assets/img/eraser.png");
+  }
+
+  &-fullscreen {
+    background-image: url("../assets/img/fullscreen.png");
+  }
+
+  &-brush {
+    background-image: url("../assets/img/brush.png");
   }
 }
 
-
 // ------------------------------------------------------
+
+
+
+// -------------------------------
+
+$primary: #535353;
+$secondary: #383838;
+$dark: #292929;
+$darkSecondary: #474747;
+$light: #6a6a6a;
+
+* {
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+  outline: none;
+}
+
+html,
+body {
+  height: 100%;
+}
+
+body {
+  background: $dark;
+}
+
+#app-root,
+.board-wrapper {
+  height: 100%;
+}
+
+.board-wrapper {
+  display: flex;
+}
+
+.tool-properties {
+  height: 50px;
+  width: 100%;
+  background: $primary;
+  border: 1px solid $dark;
+}
+
+.tool-box {
+  width: 55px;
+  height: 100%;
+  background: $primary;
+  border: 1px solid $dark;
+
+  &:before {
+    content: "Tools!";
+    font-size: 10px;
+    font-weight: bold;
+    color: #ccc;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: $dark;
+    height: 20px;
+    border-top: 1px solid $darkSecondary;
+  }
+
+  &__menu {
+    border-top: 1px solid $light;
+    padding: 5px;
+  }
+}
+
+.menu-button {
+  height: 35px;
+  width: 35px;
+  border-radius: 5px;
+  margin: 5px 0;
+  display: inline-block;
+  position: relative;
+  background-color: $primary;
+
+  &:hover {
+    border: 2px solid $light;
+  }
+
+  &--selected {
+    background-color: $secondary;
+    border: 2px solid $dark;
+    border-top: 2px solid $dark;
+
+    &:hover {
+      border: 2px solid $dark;
+    }
+
+    &:before {
+      content: "";
+      display: block;
+      position: absolute;
+      top: 0;
+      width: 27px;
+      height: 0px;
+      box-shadow: 0 0 2px 1px rgba(0, 0, 0, 0.32);
+    }
+    &:after {
+      content: "";
+      display: block;
+      position: absolute;
+      bottom: -3px;
+      width: 28px;
+      height: 0px;
+      box-shadow: 0 0 2px 1px $light;
+    }
+  }
+}
+
+select {
+  background: $secondary;
+  border: 1px solid $dark;
+  color: #ccc;
+  font-weight: bold;
+  font-size: 12px;
+  padding: 5px;
+}
+
+.color-button {
+  background: #fff;
+  display: inline-block;
+  width: 30px;
+  height: 30px;
+  border: 2px solid $secondary;
+  border-radius: 5px;
+}
+
+.separator {
+  height: 40px;
+  width: 0;
+  border-right: 1px solid $light;
+  border-left: 1px solid $secondary;
+  margin: 0 25px;
+}
+
+.menu-properties {
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  width: 100%;
+  padding-left: 15px;
+
+  label {
+    margin: 0 15px 0 0;
+    font-size: 11px;
+    font-weight: bold;
+    color: #ccc;
+  }
+}
 
 .color-pallet {
   position: fixed;
-  top: 10px;
-  left: 80px ;
-  background: $color2;
+  top: 51px;
+  left: 80px;
+  background: $primary;
+  border-radius: 10px;
   min-width: 200px;
   visibility: hidden;
   min-height: 150px;
   opacity: 0;
-  transition: .2s;
+  transition: 0.2s;
+  border: 1px solid $dark;
+  padding: 15px;
+  z-index: 100;
 
   &__color {
     width: 30px;
     height: 30px;
+    margin: 1px;
     display: inline-block;
     cursor: pointer;
+
+    &:hover {
+      border: 2px solid $dark;
+    }
   }
+}
+
+.hidden {
+  opacity: 0;
+  display: none;
+  visibility: hidden;
 }
 
 .visible {
   opacity: 1;
+  display: initial;
   visibility: visible;
 }

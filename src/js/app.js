@@ -1,11 +1,17 @@
-import start from './core';
+import start from "./core";
+import { createStore } from "./core/store";
 
-start(document.getElementById('app-root'));
-
-
-
-
-
+createStore({
+  toolbox: {
+    brush: { color: "#222", size: 5},
+    pencil: { color: "#222", size: 1},
+    eraser: { size: 2},
+    background:{ color: `#ccc` },
+    currentTool: `pencil`,
+  },
+  colorPallet: { target: "", isVisible: false }
+});
+start(document.getElementById("app-root"));
 
 // function getViewportSize() {
 //   const w = Math.max(
@@ -119,7 +125,7 @@ start(document.getElementById('app-root'));
 //     if(this.isVisible) {
 //       this.hide();
 //       return;
-//     } 
+//     }
 //     this.show();
 //   }
 
@@ -127,7 +133,7 @@ start(document.getElementById('app-root'));
 //     if(this.isActive) {
 //       this.deactive();
 //       return;
-//     } 
+//     }
 //     this.active();
 //   }
 
@@ -153,7 +159,6 @@ start(document.getElementById('app-root'));
 //   });
 // }
 
-
 // const store = new Store();
 // const components = new Map();
 // store.on('change', state => console.log(state))
@@ -162,11 +167,11 @@ start(document.getElementById('app-root'));
 //   toggleColorPallet: e => {
 //     const state = store.state;
 //     if(state.colorpallet.isVisible) {
-//       store.set({ 
+//       store.set({
 //         colorpallet: { isVisible: false},
 //       });
 //     } else {
-//       store.set({ 
+//       store.set({
 //         colorpallet: { isVisible: true},
 //       });
 //     }
@@ -174,12 +179,12 @@ start(document.getElementById('app-root'));
 //   toggleBackgroundSettings: e => {
 //     const state = store.state;
 //     if(state.backgroundsettings.isVisible) {
-//       store.set({ 
+//       store.set({
 //         backgroundbtn: { isActive: false },
 //         backgroundsettings: { isVisible: false},
 //       });
 //     } else {
-//       store.set({ 
+//       store.set({
 //         backgroundbtn: { isActive: true },
 //         backgroundsettings: { isVisible: true},
 //         colorpallet: { target: `background`},
@@ -189,12 +194,12 @@ start(document.getElementById('app-root'));
 //   togglePencilSettings: e => {
 //     const state = store.state;
 //     if(state.pencilsettings.isVisible) {
-//       store.set({ 
+//       store.set({
 //         pencilbtn: { isActive: false },
 //         pencilsettings: { isVisible: false},
 //       });
 //     } else {
-//       store.set({ 
+//       store.set({
 //         pencilbtn: { isActive: true },
 //         pencilsettings: { isVisible: true},
 //         colorpallet: { target: `pencil`},
@@ -202,7 +207,7 @@ start(document.getElementById('app-root'));
 //     }
 //   },
 //   hideAll: e => {
-//     store.set({ 
+//     store.set({
 //       pencilbtn: { isActive: false },
 //       pencilsettings: { isVisible: false},
 //       backgroundsettings: { isVisible: false},
@@ -333,7 +338,6 @@ start(document.getElementById('app-root'));
 //       action = data;
 //       actions[action] && actions[action](null, e);
 //     }
-    
+
 //   });
 // });
-

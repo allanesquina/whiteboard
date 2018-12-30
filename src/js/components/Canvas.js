@@ -5,8 +5,8 @@ import  Board from "./Board";
 import  Vector2 from "./Vector2";
 
 function setCanvasSize(canvas) {
-  canvas.width = getViewportSize().w - 10;
-  canvas.height = getViewportSize().h - 10;
+  canvas.width = getViewportSize().w - 70;
+  canvas.height = getViewportSize().h - 20;
 }
 
 function bindEvents(canvas, board) {
@@ -36,12 +36,7 @@ function bindEvents(canvas, board) {
 class Canvas extends Component {
   onInit() {
     const canvas = this.ids.get("canvas");
-    const board = new Board({
-      pencil: {
-        size: 3,
-        color: `#ccc`
-      }
-    }, canvas);
+    const board = new Board(this.store.state.toolbox, canvas);
 
     setCanvasSize(canvas);
 
@@ -49,6 +44,7 @@ class Canvas extends Component {
 
     this.board = board;
     this.canvas = canvas;
+
   }
 
   onStateChange(state) {
