@@ -14,9 +14,9 @@ class MenuButton extends Component {
     const isSelected = selected || storeValue === type;
 
     if(isSelected) {
-      el.classList.add('menu-button--selected');
+      el.classList.add('menu-button-selected');
     } else {
-      el.classList.remove('menu-button--selected');
+      el.classList.remove('menu-button-selected');
     }
   }
 

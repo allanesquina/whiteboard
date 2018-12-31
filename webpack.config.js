@@ -1,6 +1,8 @@
 const path = require('path');
 const webpack = require('webpack');
 const userConfig = require('./config');
+const CopyWebpackPlugin = require('copy-webpack-plugin');
+
 
 const isProduction = process.env.NODE_ENV === 'production';
 let publicDir = '/';
@@ -122,6 +124,9 @@ const webpackConfig = {
       filename: isProduction ? '[name].[contenthash].css' : '[name].css',
       chunkFilename: isProduction ? '[id].[contenthash].css' : '[id].css',
     }),
+    new CopyWebpackPlugin([
+      { from: './src/static/', to: '' }
+    ]),
   ],
   optimization: {
     minimizer: [
