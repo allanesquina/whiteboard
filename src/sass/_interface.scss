@@ -45,8 +45,6 @@ canvas {
 
 // ------------------------------------------------------
 
-
-
 // -------------------------------
 
 $primary: #535353;
@@ -54,6 +52,7 @@ $secondary: #383838;
 $dark: #292929;
 $darkSecondary: #474747;
 $light: #6a6a6a;
+$selected: #f44336;
 
 * {
   padding: 0;
@@ -71,13 +70,18 @@ body {
   background: $dark;
 }
 
-#app-root,
-.board-wrapper {
-  height: 100%;
+#app-root {
+  height: 94.7%;
 }
+
+.board-wrapper { }
 
 .board-wrapper {
   display: flex;
+  position: fixed;
+  top:50px;
+  left:0;
+  height: 100%;
 }
 
 .tool-properties {
@@ -85,6 +89,9 @@ body {
   width: 100%;
   background: $primary;
   border: 1px solid $dark;
+  position: fixed;
+  top:0;
+  left:0;
 }
 
 .tool-box {
@@ -158,6 +165,7 @@ body {
 select {
   background: $secondary;
   border: 1px solid $dark;
+  border-radius: 3px;
   color: #ccc;
   font-weight: bold;
   font-size: 12px;
@@ -196,30 +204,71 @@ select {
   }
 }
 
-.color-pallet {
-  position: fixed;
+.color-palette {
+  position: absolute;
   top: 51px;
   left: 80px;
   background: $primary;
   border-radius: 10px;
   min-width: 200px;
+  max-width: 400px;
+  max-height: 400px;
   visibility: hidden;
   min-height: 150px;
   opacity: 0;
-  transition: 0.2s;
+  // transition: 0.2s;
   border: 1px solid $dark;
-  padding: 15px;
   z-index: 100;
+  overflow: hidden;
+
+  &:before {
+    content: "Palettes";
+    font-size: 10px;
+    font-weight: bold;
+    color: #ccc;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: $dark;
+    height: 20px;
+    border-top: 1px solid $darkSecondary;
+  }
+
+  label {
+    margin: 0 15px 0 0;
+    font-size: 13px;
+    font-weight: bold;
+    color: #ccc;
+    width: 100%;
+    text-align: left;
+    display: block;
+    margin: 5px 0;
+  }
+
+  &__container {
+    max-height: 300px;
+    overflow: auto;
+    margin: 15px;
+  }
+
+  &__wrapper {
+    line-height: 0;
+    text-align: left;
+    margin: 0 0 15px 0;
+  }
 
   &__color {
-    width: 30px;
-    height: 30px;
-    margin: 1px;
+    width: 15px;
+    height: 15px;
     display: inline-block;
     cursor: pointer;
 
+    &--selected {
+      border: 3px solid $selected;
+    }
+
     &:hover {
-      border: 2px solid $dark;
+      border: 3px solid $light;
     }
   }
 }
@@ -234,4 +283,17 @@ select {
   opacity: 1;
   display: initial;
   visibility: visible;
+}
+
+div::-webkit-scrollbar {
+  width: 0.5em;
+}
+
+div::-webkit-scrollbar-track {
+  -webkit-box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.3);
+}
+
+div::-webkit-scrollbar-thumb {
+  background-color: $light;
+  outline: 1px solid $light;
 }

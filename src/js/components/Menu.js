@@ -1,18 +1,28 @@
 import { Component } from "../core/Component";
 import { Connect } from "../core/store";
-import { openFullscreen } from "../core/util";
+import { openFullscreen, closeFullscreen } from "../core/util";
 
 class Menu extends Component {
   constructor(DOM) {
     super(DOM);
   }
 
-  onStateChange(state) {
-    console.log(`menu`, state);
-  }
-
   handleClickFullscreen(e) {
-    openFullscreen();
+    const isFullscreen =
+      this.store.getState(`toolbox.fullscreen`, this.store.state) === "on";
+    if (isFullscreen) {
+      this.store.setState({
+        toolbox: { fullscreen: `off` }
+      });
+      closeFullscreen();
+    } else {
+      if (confirm(`It would reset your board, do you want to proceed?`)) {
+        this.store.setState({
+          toolbox: { fullscreen: `on` }
+        });
+        openFullscreen();
+      }
+    }
   }
 
   handleClickBackground(e) {
@@ -42,27 +52,37 @@ class Menu extends Component {
   render() {
     return `
             <div class="tool-box__menu">
-								<div data-component="MenuButton"
-										data-type="brush"
-                    component-click="handleClickBrush(e)"
+                <div data-component="MenuButton"
+										data-icon="pencil"
+										data-type="pencil"
+										data-path="toolbox.currentTool"
+                    component-click="handleClickPencil(e)"
                 >
                 </div>
 								<div data-component="MenuButton"
-										data-type="pencil"
-                    component-click="handleClickPencil(e)"
+										data-type="brush"
+										data-icon="brush"
+										data-path="toolbox.currentTool"
+                    component-click="handleClickBrush(e)"
                 >
                 </div>
                 <div data-component="MenuButton"
 										data-type="eraser"
+										data-icon="eraser"
+										data-path="toolbox.currentTool"
                     component-click="handleClickEraser(e)"
                 ></div>
                 <div data-component="MenuButton"
 										data-type="background"
+										data-path="toolbox.currentTool"
+										data-icon="background"
                     component-click="handleClickBackground(e)"
                 >
                 </div>
                 <div data-component="MenuButton"
-										data-type="fullscreen"
+										data-type="on"
+										data-path="toolbox.fullscreen"
+										data-icon="fullscreen"
                     component-click="handleClickFullscreen(e)"
                 ></div>
             </div>

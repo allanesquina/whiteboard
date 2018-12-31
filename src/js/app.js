@@ -3,10 +3,10 @@ import { createStore } from "./core/store";
 
 createStore({
   toolbox: {
-    brush: { color: "#222", size: 5},
-    pencil: { color: "#222", size: 1},
-    eraser: { size: 2},
-    background:{ color: `#ccc` },
+    brush: { color: "#0091ea", size: 10},
+    pencil: { color: "#0091ea", size: 3},
+    eraser: { size: 10},
+    background:{ color: `#eceff1` },
     currentTool: `pencil`,
   },
   colorPallet: { target: "", isVisible: false }

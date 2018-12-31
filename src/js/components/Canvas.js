@@ -5,8 +5,8 @@ import  Board from "./Board";
 import  Vector2 from "./Vector2";
 
 function setCanvasSize(canvas) {
-  canvas.width = getViewportSize().w - 70;
-  canvas.height = getViewportSize().h - 20;
+  canvas.width = getViewportSize().w - 55;
+  canvas.height = getViewportSize().h - 50;
 }
 
 function bindEvents(canvas, board) {

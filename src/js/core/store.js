@@ -1,5 +1,6 @@
 import Event from "./jps";
 import { deepExtend } from './util';
+import { getPath } from "./util";
 
 export let store;
 
@@ -16,6 +17,10 @@ export default class Store {
     let newState = deepExtend(this.state, state);
     this.event.emit("change", newState);
     this.state = newState;
+  }
+
+  getState(path) {
+    return getPath(path, this.state);
   }
 }
 

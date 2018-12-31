@@ -35,8 +35,10 @@ class MenuPencilProperties extends Component {
 
   renderSelect() {
     let buff = [];
+    const currentSize = this.store.getState(`toolbox.pencil.size`);
     this.sizes.forEach(size => {
-      buff.push(`<option value="${size}">${size}pt</option>`);
+      const selected = size === currentSize ? `selected='selected'` : ``;
+      buff.push(`<option ${selected} value="${size}">${size}pt</option>`);
     });
 
     return `
@@ -51,8 +53,7 @@ class MenuPencilProperties extends Component {
             <div class="menu-properties">
               <label> Pencil </label>
               <div data-component="MenuButton"
-                  data-selected='false'
-                  data-type="pencil"
+                  data-icon="pencil"
               ></div>
               <span class="separator"></span>
               <label> Color: </label>

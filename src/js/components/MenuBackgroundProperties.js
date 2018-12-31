@@ -30,8 +30,7 @@ class MenuBackgroundProperties extends Component {
             <div class="menu-properties">
               <label> Background </label>
               <div data-component="MenuButton"
-                  data-selected='false'
-                  data-type="background"
+                  data-icon="background"
               ></div>
               <span class="separator"></span>
               <label> Color: </label>

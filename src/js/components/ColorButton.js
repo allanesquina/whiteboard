@@ -30,8 +30,6 @@ class ColorButton extends Component {
 
   handleClick(e) {
     const el = e.target;
-
-    console.dir(el.offsetLeft)
     this.store.setState({ colorPallet: { target: this.props.type, isVisible: true, x: el.offsetLeft }});
   }
 

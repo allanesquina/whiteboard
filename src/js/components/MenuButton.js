@@ -4,21 +4,13 @@ import { Connect } from "../core/store";
 class MenuButton extends Component {
 
   checkState(state) {
-    const currentTool = state.toolbox.currentTool;
+
     const el = this.ids.get(`btn`);
-    const { selected } = this.props
+    const { path, selected, type } = this.props
+    const storeValue = path ? this.store.getState(path) : false;
+    const isSelected = selected || storeValue === type;
 
-    if(selected === 'true') {
-      el.classList.add('menu-button--selected');
-      return
-    } 
-
-    if(selected === 'false') {
-      el.classList.remove('menu-button--selected');
-      return
-    } 
-
-    if(currentTool === this.props.type) {
+    if(isSelected) {
       el.classList.add('menu-button--selected');
     } else {
       el.classList.remove('menu-button--selected');
@@ -34,10 +26,10 @@ class MenuButton extends Component {
   }
 
   render() {
-    const { type } = this.props;
+    const { icon } = this.props;
     return `
             <div 
-                component-id="btn" class="menu-button icon icon-${type}"
+                component-id="btn" class="menu-button icon icon-${icon}"
             ></div>
         `;
   }
