@@ -43,15 +43,23 @@ class TopMenu extends Component {
     }
   }
 
+  handleClickGithub(e) {
+    window.open('https://github.com/allanesquina/whiteboard', '_blank');
+  }
+
   render() {
     return `
             <div class="top-menu">
                 <div data-component="MenuButton"
 										data-icon="garbage"
+								    data-title="Clear Board"
                     component-click="handleClickEraser(e)"
                 ></div>
 
+                <span class="separator"></span>
+
                 <div data-component="MenuButton"
+								    data-title="Download Image"
 										data-icon="download"
                     component-click="handleClickDownload(e)"
                 ></div>
@@ -59,11 +67,21 @@ class TopMenu extends Component {
                 <span class="separator"></span>
 
                 <div data-component="MenuButton"
+								    data-title="Source Code on Github"
+										data-icon="github"
+                    component-click="handleClickGithub(e)"
+                ></div>
+
+                <span class="separator"></span>
+
+                <div data-component="MenuButton"
+								    data-title="Fullscreen"
 										data-type="on"
 										data-path="toolbox.fullscreen"
 										data-icon="fullscreen"
                     component-click="handleClickFullscreen(e)"
                 ></div>
+
             </div>
         `;
   }

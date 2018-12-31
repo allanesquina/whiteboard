@@ -13,13 +13,22 @@ function bindEvents(Canvas) {
   let prevPos;
   ["mouseover", "mousemove", "mouseup", "mousedown"].forEach(eventType => {
     Canvas.canvas.addEventListener(eventType, e => {
+      let currentPos = new Vector2(e.offsetX, e.offsetY);
+      prevPos = prevPos ? prevPos : currentPos;
+      
+
       if (eventType === "mousedown") {
         Canvas.preserve();
+
+        if (e.buttons === 1) {
+          Canvas.draw({ x: currentPos.x-2, y: currentPos.y -2}, currentPos);
+        }
+        if (e.buttons === 2) {
+          Canvas.erase({ x: currentPos.x-2, y: currentPos.y -2}, currentPos);
+        }
       }
 
-      if (eventType === "mousemove") {
-        let currentPos = new Vector2(e.offsetX, e.offsetY);
-        prevPos = prevPos ? prevPos : currentPos;
+      if (eventType === "mousemove" ) {
 
         if (e.buttons === 1) {
           Canvas.draw(prevPos, currentPos);
@@ -35,10 +44,11 @@ function bindEvents(Canvas) {
         prevPos = false;
         Canvas.restore();
       }
+
     });
   });
 
-  window.addEventListener("contextmenu", e => {
+  Canvas.canvas.addEventListener("contextmenu", e => {
     e.preventDefault();
   });
 

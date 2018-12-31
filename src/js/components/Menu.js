@@ -54,12 +54,14 @@ class Menu extends Component {
             <div class="tool-box__menu">
                 <div data-component="MenuButton"
 										data-icon="pencil"
+										data-title="Pencil"
 										data-type="pencil"
 										data-path="toolbox.currentTool"
                     component-click="handleClickPencil(e)"
                 >
                 </div>
 								<div data-component="MenuButton"
+										data-title="Brush"
 										data-type="brush"
 										data-icon="brush"
 										data-path="toolbox.currentTool"
@@ -67,6 +69,7 @@ class Menu extends Component {
                 >
                 </div>
                 <div data-component="MenuButton"
+										data-title="Eraser"
 										data-type="eraser"
 										data-icon="eraser"
 										data-path="toolbox.currentTool"
@@ -76,6 +79,7 @@ class Menu extends Component {
                 <span class="separator-horizontal"></span>
 
                 <div data-component="MenuButton"
+										data-title="Background Settings"
 										data-type="background"
 										data-path="toolbox.currentTool"
 										data-icon="background"

@@ -49,6 +49,10 @@ canvas {
   &-brush {
     background-image: url("../assets/img/brush.png");
   }
+
+  &-github {
+    background-image: url("../assets/img/github.png");
+  }
 }
 
 // ------------------------------------------------------
@@ -86,30 +90,47 @@ canvas {
   height: 94.7%;
 }
 
-.board-wrapper { }
 
 .board-wrapper {
   display: flex;
   position: fixed;
-  top:50px;
+  top:65px;
   left:0;
   height: 100%;
+}
+
+.top-bar {
+  position: fixed;
+  top:0;
+  left:0;
+  height: 15px;
+  width: 100%;
+  color: #ccc;
+  font-size: 9px;
+  display: flex;
+  align-items: center;
+  padding: 4px 5px 0;
+  font-weight: bold;
 }
 
 .tool-properties {
   height: 50px;
   width: 100%;
   display: flex;
+  align-items: center;
   justify-content: space-between;
   background: $primary;
   border: 1px solid $dark;
+  border-top: 1px solid $light;
   position: fixed;
-  top:0;
+  top:15px;
   left:0;
+
 }
 .top-menu {
   display: flex;
   padding: 0 5px;
+  align-items: center;
 }
 
 .tool-box {
@@ -145,6 +166,8 @@ canvas {
   display: inline-block;
   position: relative;
   background-color: $primary;
+  border: 2px solid $primary;
+  transition: .2s;
 
   &:hover {
     border: 2px solid $light;
@@ -234,8 +257,8 @@ select {
 
 .color-palette {
   position: absolute;
-  top: 51px;
-  left: 80px;
+  top: 66px;
+  left: 180px;
   background: $primary;
   border-radius: 10px;
   min-width: 200px;
@@ -244,7 +267,6 @@ select {
   visibility: hidden;
   min-height: 150px;
   opacity: 0;
-  // transition: 0.2s;
   border: 1px solid $dark;
   z-index: 100;
   overflow: hidden;
@@ -280,6 +302,7 @@ select {
   }
 
   &__wrapper {
+  transition: .2s;
     line-height: 0;
     text-align: left;
     margin: 0 0 15px 0;

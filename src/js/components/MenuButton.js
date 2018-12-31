@@ -2,6 +2,9 @@ import { Component } from '../core/Component';
 import { Connect } from "../core/store";
 
 class MenuButton extends Component {
+  constructor(DOM) {
+    super(DOM);
+  }
 
   checkState(state) {
 
@@ -26,11 +29,12 @@ class MenuButton extends Component {
   }
 
   render() {
-    const { icon } = this.props;
+    const { icon, title } = this.props;
+    const strTitle = title || '';
     return `
-            <div 
-                component-id="btn" class="menu-button icon icon-${icon}"
-            ></div>
+            <button 
+                component-id="btn" title="${strTitle}" class="menu-button icon icon-${icon}"
+            ></button>
         `;
   }
 }

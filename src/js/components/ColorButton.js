@@ -36,6 +36,7 @@ class ColorButton extends Component {
   render() {
     return `
             <div 
+								title="Color"
                 component-id="btn" 
                 component-click="handleClick(e)"
                 class="color-button"
