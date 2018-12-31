@@ -8,6 +8,7 @@ import MenuBrushProperties from './MenuBrushProperties';
 import MenuPencilProperties from './MenuPencilProperties';
 import MenuEraserProperties from './MenuEraserProperties';
 import MenuBackgroundProperties from './MenuBackgroundProperties';
+import TopMenu from './TopMenu';
 
 export default {
     ColorPallet,
@@ -20,4 +21,5 @@ export default {
     MenuPencilProperties,
     MenuEraserProperties,
     MenuBackgroundProperties,
+    TopMenu,
 }

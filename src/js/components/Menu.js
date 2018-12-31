@@ -72,6 +72,9 @@ class Menu extends Component {
 										data-path="toolbox.currentTool"
                     component-click="handleClickEraser(e)"
                 ></div>
+
+                <span class="separator-horizontal"></span>
+
                 <div data-component="MenuButton"
 										data-type="background"
 										data-path="toolbox.currentTool"
@@ -79,12 +82,6 @@ class Menu extends Component {
                     component-click="handleClickBackground(e)"
                 >
                 </div>
-                <div data-component="MenuButton"
-										data-type="on"
-										data-path="toolbox.fullscreen"
-										data-icon="fullscreen"
-                    component-click="handleClickFullscreen(e)"
-                ></div>
             </div>
         `;
   }

@@ -9,6 +9,10 @@ createStore({
     background:{ color: `#eceff1` },
     currentTool: `pencil`,
   },
+  board: {
+    reset: false,
+    download: false,
+  },
   colorPallet: { target: "", isVisible: false }
 });
 start(document.getElementById("app-root"));

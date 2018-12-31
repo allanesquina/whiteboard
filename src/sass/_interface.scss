@@ -34,6 +34,14 @@ canvas {
     background-image: url("../assets/img/eraser.png");
   }
 
+  &-garbage {
+    background-image: url("../assets/img/garbage.png");
+  }
+
+  &-download {
+    background-image: url("../assets/img/download.png");
+  }
+
   &-fullscreen {
     background-image: url("../assets/img/fullscreen.png");
   }
@@ -70,6 +78,10 @@ body {
   background: $dark;
 }
 
+canvas {
+  cursor: url(../assets/img/pencil_cursor.png) 3 3, crosshair;
+}
+
 #app-root {
   height: 94.7%;
 }
@@ -87,11 +99,17 @@ body {
 .tool-properties {
   height: 50px;
   width: 100%;
+  display: flex;
+  justify-content: space-between;
   background: $primary;
   border: 1px solid $dark;
   position: fixed;
   top:0;
   left:0;
+}
+.top-menu {
+  display: flex;
+  padding: 0 5px;
 }
 
 .tool-box {
@@ -179,6 +197,7 @@ select {
   height: 30px;
   border: 2px solid $secondary;
   border-radius: 5px;
+  cursor: pointer;
 }
 
 .separator {
@@ -187,6 +206,15 @@ select {
   border-right: 1px solid $light;
   border-left: 1px solid $secondary;
   margin: 0 25px;
+}
+
+.separator-horizontal {
+  height: 0;
+  width: 40px;
+  border-bottom: 1px solid $light;
+  border-top: 1px solid $secondary;
+  margin: 5px 0;
+  display: block;
 }
 
 .menu-properties {
